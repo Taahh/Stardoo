@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using HarmonyLib;
 using Lidgren.Network;
+using StardewValley;
 using StardewValley.Network;
 
 namespace MultiplayerMod.Patches
@@ -41,7 +42,23 @@ namespace MultiplayerMod.Patches
         [HarmonyPatch(typeof(LidgrenClient), "validateProtocol")]
         public static void Validate([HarmonyArgument(0)] string version)
         {
-            ModEntry.Instance.Monitor.Log($"Attempting to validate version {version}");
+            ModEntry.Instance.Monitor.Log($"Attempting to validate version {version ?? "bruh"}");
+            Console.WriteLine(version);
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(LidgrenClient), nameof(LidgrenClient.disconnect))]
+        public static bool disconnect()
+        {
+            ModEntry.Instance.Monitor.Log($"Farmer ID: {Game1.player?.uniqueMultiplayerID.Value}");
+            return true;
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(Client), "processIncomingMessage")]
+        public static void Prefix([HarmonyArgument(0)] IncomingMessage message)
+        {
+            ModEntry.Instance.Monitor.Log($"received incoming msg {message.MessageType} and {message.FarmerID}");
         }
     }
 }

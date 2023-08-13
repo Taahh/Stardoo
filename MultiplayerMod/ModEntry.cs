@@ -2,6 +2,7 @@ using System;
 using HarmonyLib;
 using Lidgren.Network;
 using StardewModdingAPI;
+using StardewValley;
 
 namespace MultiplayerMod
 {
@@ -11,7 +12,8 @@ namespace MultiplayerMod
         public override void Entry(IModHelper helper)
         {
             Instance = this;
-            this.Monitor.Log("Test");
+            Monitor.Log("Test");
+            Monitor.Log(Game1.content.LoadString("Strings\\UI:CoopMenu_FailedProtocolVersion"));
 
             var harmony = new Harmony(this.ModManifest.UniqueID);
             harmony.PatchAll();

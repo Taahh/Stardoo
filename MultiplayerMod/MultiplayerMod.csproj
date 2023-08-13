@@ -6,7 +6,7 @@
     </PropertyGroup>
     
     <PropertyGroup>
-        <GamePath>E:\SteamLibrary\steamapps\common\Stardew Valley</GamePath>
+        <GamePath>/home/taahasayed/.local/share/Steam/steamapps/common/Stardew Valley</GamePath>
         <UseHarmony>true</UseHarmony>
     </PropertyGroup>
 
