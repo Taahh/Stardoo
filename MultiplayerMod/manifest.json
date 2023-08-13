@@ -1,0 +1,10 @@
+{
+  "Name": "Better Multiplayer",
+  "Author": "Taah",
+  "Version": "1.0.0",
+  "Description": "Adds the functionality to connect to other servers",
+  "UniqueID": "taah.multiplayer",
+  "EntryDll": "MultiplayerMod.dll",
+  "MinimumApiVersion": "3.0.0",
+  "UpdateKeys": []
+}
