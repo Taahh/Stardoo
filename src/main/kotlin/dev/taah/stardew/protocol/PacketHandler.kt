@@ -49,7 +49,7 @@ class PacketHandler : SimpleChannelInboundHandler<ByteBuf>() {
         println(ByteBufUtil.prettyHexDump(buffer))
 
         val b = buffer.readUnsignedByte().toInt();
-        println("Packet: $b, Fragment: ${buffer.readByte()}, Sequence: ${buffer.readByte()}, Payload Length: ${(buffer.readUnsignedShort() + 7) / 8}")
+        println("Packet: $b, Fragment: ${buffer.readByte()}, Sequence: ${buffer.readByte()}, Payload Length: ${(buffer.readUnsignedShortLE()) / 8}")
         val packet = StardewServer.HANDLER.getPacket<AbstractPacket<*>>(b)
 
         if (packet != null) {

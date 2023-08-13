@@ -2,9 +2,8 @@ package dev.taah.stardew.protocol
 
 import com.google.common.collect.Maps
 import dev.taah.stardew.packet.AbstractPacket
-import dev.taah.stardew.packet.handshake.ServerboundConnectPacket
-import dev.taah.stardew.packet.handshake.ServerboundDiscoveryPacket
-import dev.taah.stardew.packet.handshake.ServerboundPingPacket
+import dev.taah.stardew.packet.handshake.*
+import dev.taah.stardew.packet.reliable.GeneralReliablePacket
 import kotlin.reflect.KClass
 import kotlin.reflect.full.primaryConstructor
 
@@ -27,6 +26,9 @@ class ProtocolHandler {
         this.registerPacket(0x88, ServerboundDiscoveryPacket::class as KClass<AbstractPacket<*>>)
         this.registerPacket(0x83, ServerboundConnectPacket::class as KClass<AbstractPacket<*>>)
         this.registerPacket(0x81, ServerboundPingPacket::class as KClass<AbstractPacket<*>>)
+        this.registerPacket(133, ServerboundConnectionEstablishedPacket::class as KClass<AbstractPacket<*>>)
+        this.registerPacket(134, GeneralAcknowledgePacket::class as KClass<AbstractPacket<*>>)
+        this.registerPacket(67, GeneralReliablePacket::class as KClass<AbstractPacket<*>>)
     }
 
     fun registerPacket(id: Int, clazz: KClass<AbstractPacket<*>>) {

@@ -1,6 +1,7 @@
 package dev.taah.stardew.connection
 
 import dev.taah.stardew.packet.AbstractPacket
+import dev.taah.stardew.packet.reliable.GeneralReliablePacket
 import dev.taah.stardew.util.PacketBuffer
 import io.netty.buffer.ByteBufUtil
 import io.netty.channel.ChannelHandlerContext
@@ -19,10 +20,15 @@ class PlayerConnection(@Transient val channel: ChannelHandlerContext, val unique
     }
     fun sendPacket(packet: AbstractPacket<*>) {
         val buffer = PacketBuffer()
+        // packet id
+        // sequence
+        // fragment
+        // this
         packet.serialize(buffer)
-        val len = (buffer.readableBytes() - 5 - 7) * 8
-        buffer.setShortLE(3, len)
-        channel.writeAndFlush(buffer)
+        val len = buffer.readableBytes() - 5
+        println("Sending length: $len")
+        buffer.setShortLE(3, len * 8)
+        channel.writeAndFlush(buffer.retain())
         println("Sending ${packet.javaClass.name} with payload ${ByteBufUtil.prettyHexDump(buffer)}")
     }
 }

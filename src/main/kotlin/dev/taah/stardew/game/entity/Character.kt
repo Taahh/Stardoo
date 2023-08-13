@@ -6,5 +6,5 @@ package dev.taah.stardew.game.entity
  * @since 10:15 PM [12-08-2023]
  *
  */
-abstract class Character(val sprite) {
+abstract class Character {
 }

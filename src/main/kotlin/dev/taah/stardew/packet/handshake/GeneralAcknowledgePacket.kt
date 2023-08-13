@@ -1,7 +1,6 @@
 package dev.taah.stardew.packet.handshake
 
 import dev.taah.stardew.connection.PlayerConnection
-import dev.taah.stardew.net.NetTime
 import dev.taah.stardew.packet.AbstractPacket
 import dev.taah.stardew.util.PacketBuffer
 
@@ -11,16 +10,18 @@ import dev.taah.stardew.util.PacketBuffer
  * @since 12:49 AM [12-08-2023]
  *
  */
-class ClientboundPongPacket(val pingNum: Int) : AbstractPacket<ClientboundPongPacket>(0x82) {
+class GeneralAcknowledgePacket : AbstractPacket<GeneralAcknowledgePacket>(0x86) {
+    var byteArray: ByteArray? = null
     override fun deserialize(buffer: PacketBuffer) {
+        this.byteArray = buffer.byteArray
     }
 
     override fun serialize(buffer: PacketBuffer) {
         super.serialize(buffer)
-        buffer.writeByte(pingNum)
-        buffer.writeFloatLE(NetTime.now().toFloat())
+        this.byteArray?.let { buffer.writeBytes(it) }
     }
 
-    override fun processPacket(packet: ClientboundPongPacket, connection: PlayerConnection) {
+    override fun processPacket(packet: GeneralAcknowledgePacket, connection: PlayerConnection) {
+        connection.sendPacket(packet)
     }
 }

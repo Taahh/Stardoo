@@ -833,8 +833,8 @@ class PacketBuffer @JvmOverloads constructor(val byteBuf: ByteBuf = Unpooled.dir
         writeShortLE(value)
     }
 
-    fun writeUInt32(value: Long) {
-        writeLongLE(value)
+    fun writeUInt32(value: Int) {
+        writeIntLE(value)
     }
 
     fun writePackedUInt32(value: Long) {

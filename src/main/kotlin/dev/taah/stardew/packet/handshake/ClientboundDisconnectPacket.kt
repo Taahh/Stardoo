@@ -11,16 +11,15 @@ import dev.taah.stardew.util.PacketBuffer
  * @since 12:49 AM [12-08-2023]
  *
  */
-class ClientboundPongPacket(val pingNum: Int) : AbstractPacket<ClientboundPongPacket>(0x82) {
+class ClientboundDisconnectPacket : AbstractPacket<ClientboundDisconnectPacket>(0x87) {
     override fun deserialize(buffer: PacketBuffer) {
     }
 
     override fun serialize(buffer: PacketBuffer) {
         super.serialize(buffer)
-        buffer.writeByte(pingNum)
-        buffer.writeFloatLE(NetTime.now().toFloat())
+        buffer.writeString("Your mom your mom your mom")
     }
 
-    override fun processPacket(packet: ClientboundPongPacket, connection: PlayerConnection) {
+    override fun processPacket(packet: ClientboundDisconnectPacket, connection: PlayerConnection) {
     }
 }

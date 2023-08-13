@@ -1,5 +1,6 @@
 package dev.taah.stardew.packet
 
+import dev.taah.stardew.connection.PlayerConnection
 import dev.taah.stardew.util.PacketBuffer
 import dev.taah.stardew.util.serialization.INetObject
 
@@ -17,4 +18,6 @@ abstract class AbstractPacket<in T: AbstractPacket<T>>(val packetType: Int) : IN
         buffer.writeByte(0)
         buffer.writeShort(0);
     }
+
+    abstract fun processPacket(packet: T, connection: PlayerConnection)
 }
