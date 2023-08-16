@@ -9,6 +9,7 @@ import dev.taah.stardew.game.`object`.Item
 import dev.taah.stardew.game.`object`.Sprite
 import dev.taah.stardew.net.DancePartner
 import dev.taah.stardew.net.FarmerRenderer
+import dev.taah.stardew.net.NetList
 import dev.taah.stardew.net.Quest
 import dev.taah.stardew.util.PacketBuffer
 import dev.taah.stardew.util.serialization.NetObjectUtil.Companion.writeFields
@@ -58,11 +59,11 @@ class Farmer(val uniqueId: Long, sprite: Sprite, position: Vector2) : Character(
     var daysUntilHouseUpgrade: Int = 0
     var magenticRadius: Int = 0
     var spouse: String = ""
-    var mailReceived: List<String> = mutableListOf() // this requires the count being written twice for some reason?
-    var mailForTomorrow: List<String> = mutableListOf() // this requires the count being written twice for some reason?
-    var mailbox: List<String> = mutableListOf() // this requires the count being written twice for some reason?
-    var eventsSeen: List<Int> = mutableListOf() // this requires the count being written twice for some reason?
-    var secretNotesSeen: List<Int> = mutableListOf() // this requires the count being written twice for some reason?
+    var mailReceived: NetList<String> = NetList()
+    var mailForTomorrow: NetList<String> = NetList()
+    var mailbox: NetList<String> = NetList()
+    var eventsSeen: NetList<Int> = NetList()
+    var secretNotesSeen: NetList<Int> = NetList()
     var mount: Horse = Horse()
     var dancePartner: DancePartner = DancePartner()
     var divorceTonight: Boolean = false
@@ -79,9 +80,9 @@ class Farmer(val uniqueId: Long, sprite: Sprite, position: Vector2) : Character(
     var sickAnimationEvent: Int = 0
     var passOutEvent: Int = 0
     var doEmoteEvent: String = ""
-    var questLog: List<Quest> = mutableListOf()
-    var professions: List<Int> = mutableListOf()
-    var newLevels: List<Vector2> = mutableListOf()
+    var questLog: NetList<Quest> = NetList()
+    var professions: NetList<Int> = NetList()
+    var newLevels: NetList<Vector2> = NetList()
 
     override fun serialize(buffer: PacketBuffer) {
         super.serialize(buffer)

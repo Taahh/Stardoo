@@ -3,6 +3,7 @@ package dev.taah.stardew.util.serialization
 import dev.taah.stardew.net.friendship.FriendshipStatus
 import dev.taah.stardew.util.PacketBuffer
 import java.awt.Color
+import java.time.LocalDateTime
 
 /**
  * @author Taah
@@ -15,25 +16,21 @@ class NetObjectUtil {
                 where T: INetObject {
             this.javaClass.declaredFields.filter { f -> !f.isAnnotationPresent(IgnoreField::class.java) }
                 .forEach {
-                    when (val value = it.get(this)) {
-                        is String -> buffer.writeString(value)
-                        is Int -> buffer.writeIntLE(value)
-                        is Long -> buffer.writeLongLE(value)
-                        is Boolean -> buffer.writeBoolean(value)
-                        is List<*> -> {
-                            buffer.writeNetList(value) { t, u ->
-                                when (u) {
-                                    is String -> t!!.writeString(u)
-                                    is Int -> t!!.writeIntLE(u)
-                                    is INetObject -> u.serialize(t!!)
-                                }
-                            }
-                        }
-                        is INetObject -> value.serialize(buffer)
-                        is Color -> buffer.writeColor(value)
-                        is FriendshipStatus -> buffer.writeShortLE(value.index.toInt())
-                    }
+                    val value = it.get(this) as Any
+                    /*when (val value = it.get(this)) {
+//                        is String -> buffer.writeString(value)
+//                        is Int -> buffer.writeIntLE(value)
+//                        is Long -> buffer.writeLongLE(value)
+//                        is Boolean -> buffer.writeBoolean(value)
+//                        is INetObject -> value.serialize(buffer)
+//                        is Color -> buffer.writeColor(value)
+//                        is FriendshipStatus -> buffer.writeShortLE(value.index.toInt())
+
+                    }*/
+                    val consumer = NetObjectSerializers.getSerializer(value.javaClass)
+                    consumer?.accept(buffer, value)
                 }
         }
+
     }
 }
