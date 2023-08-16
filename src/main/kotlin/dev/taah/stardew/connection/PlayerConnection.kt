@@ -25,7 +25,7 @@ class PlayerConnection(@Transient val channel: ChannelHandlerContext, val unique
         // fragment
         // this
         packet.serialize(buffer)
-        val len = buffer.readableBytes() - 5
+        val len = buffer.readableBytes()
         println("Sending length: $len")
         buffer.setShortLE(3, len * 8)
         channel.writeAndFlush(buffer.retain())

@@ -6,6 +6,7 @@ import io.netty.buffer.Unpooled
 import io.netty.handler.codec.DecoderException
 import io.netty.handler.codec.EncoderException
 import io.netty.util.ByteProcessor
+import java.awt.Color
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
@@ -133,6 +134,19 @@ class PacketBuffer @JvmOverloads constructor(val byteBuf: ByteBuf = Unpooled.dir
         for (t in pCollection) {
             pElementWriter.accept(this, t)
         }
+    }
+
+    fun <T> writeNetList(pCollection: Collection<T>, pElementWriter: BiConsumer<PacketBuffer?, T>) {
+        writeVarInt(pCollection.size)
+        writeCollection(pCollection, pElementWriter)
+    }
+
+    fun writeColor(color: Color) {
+        writeIntLE(color.rgb)
+    }
+
+    fun readColor(): Color {
+        return Color(this.readIntLE())
     }
 
     /**

@@ -1,4 +1,4 @@
-package dev.taah.stardew.game.`object`
+package dev.taah.stardew.util.world
 
 import dev.taah.stardew.util.PacketBuffer
 import dev.taah.stardew.util.serialization.INetObject
@@ -6,14 +6,15 @@ import dev.taah.stardew.util.serialization.INetObject
 /**
  * @author Taah
  * @project stardew-server
- * @since 11:44 PM [12-08-2023]
- *
+ * @since 5:23 AM [14-08-2023]
  */
-class Sprite(val name: String, val width: Int, val height: Int): INetObject {
+class Vector2(var x: Float, var y: Float) : INetObject {
+    companion object {
+        val ZERO = Vector2(0f, 0f)
+    }
     override fun serialize(buffer: PacketBuffer) {
-        buffer.writeString(name)
-        buffer.writeIntLE(width)
-        buffer.writeIntLE(height)
+        buffer.writeFloatLE(x)
+        buffer.writeFloatLE(y)
     }
 
     override fun deserialize(buffer: PacketBuffer) {

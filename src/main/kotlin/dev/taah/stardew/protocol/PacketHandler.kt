@@ -25,6 +25,11 @@ connect c2s
 connect response s2c
 ping c2s
 pong s2c
+
+ack c2s
+ack s2c
+
+send available farmhands s2c
  */
 
 class PacketHandler : SimpleChannelInboundHandler<ByteBuf>() {

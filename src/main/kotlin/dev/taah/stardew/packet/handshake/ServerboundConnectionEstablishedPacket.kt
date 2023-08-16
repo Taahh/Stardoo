@@ -19,8 +19,6 @@ class ServerboundConnectionEstablishedPacket : AbstractPacket<ServerboundConnect
     }
 
     override fun processPacket(packet: ServerboundConnectionEstablishedPacket, connection: PlayerConnection) {
-//        connection.sendPacket(ClientboundConnectRespPacket(packet.byteArray))
-//        connection.sendPacket(ClientboundDisconnectPacket())
         val farmerId = Random().nextLong(0, Long.MAX_VALUE)
         println("Chose farmer id ${farmerId}")
         connection.sendPacket(GeneralReliablePacket(farmerId, ReliableType.AVAILABLE_FARMHANDS) { buffer ->

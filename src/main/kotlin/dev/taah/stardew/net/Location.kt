@@ -1,4 +1,4 @@
-package dev.taah.stardew.game.`object`
+package dev.taah.stardew.net
 
 import dev.taah.stardew.util.PacketBuffer
 import dev.taah.stardew.util.serialization.INetObject
@@ -6,16 +6,15 @@ import dev.taah.stardew.util.serialization.INetObject
 /**
  * @author Taah
  * @project stardew-server
- * @since 11:44 PM [12-08-2023]
- *
+ * @since 3:06 AM [15-08-2023]
  */
-class Sprite(val name: String, val width: Int, val height: Int): INetObject {
+class Location(var locationName: String, var isStructure: Boolean) : INetObject {
     override fun serialize(buffer: PacketBuffer) {
-        buffer.writeString(name)
-        buffer.writeIntLE(width)
-        buffer.writeIntLE(height)
+        buffer.writeString(locationName)
+        buffer.writeBoolean(isStructure)
     }
 
     override fun deserialize(buffer: PacketBuffer) {
+        TODO("Not yet implemented")
     }
 }

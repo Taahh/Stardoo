@@ -1,4 +1,4 @@
-package dev.taah.stardew.game.`object`
+package dev.taah.stardew.net
 
 import dev.taah.stardew.util.PacketBuffer
 import dev.taah.stardew.util.serialization.INetObject
@@ -6,16 +6,18 @@ import dev.taah.stardew.util.serialization.INetObject
 /**
  * @author Taah
  * @project stardew-server
- * @since 11:44 PM [12-08-2023]
- *
+ * @since 3:09 AM [15-08-2023]
  */
-class Sprite(val name: String, val width: Int, val height: Int): INetObject {
+class FarmerRef : INetObject {
+
+    var defined: Boolean = false
+    var uid: Long = 0L
     override fun serialize(buffer: PacketBuffer) {
-        buffer.writeString(name)
-        buffer.writeIntLE(width)
-        buffer.writeIntLE(height)
+        buffer.writeBoolean(defined)
+        buffer.writeLongLE(uid)
     }
 
     override fun deserialize(buffer: PacketBuffer) {
+        TODO("Not yet implemented")
     }
 }

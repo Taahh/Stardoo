@@ -1,7 +1,6 @@
 package dev.taah.stardew.packet.handshake
 
 import dev.taah.stardew.connection.PlayerConnection
-import dev.taah.stardew.net.NetTime
 import dev.taah.stardew.packet.AbstractPacket
 import dev.taah.stardew.util.PacketBuffer
 

@@ -2,6 +2,7 @@ package dev.taah.stardew
 
 import com.google.common.collect.Maps
 import dev.taah.stardew.connection.PlayerConnection
+import dev.taah.stardew.game.Game
 import dev.taah.stardew.protocol.PacketHandler
 import dev.taah.stardew.protocol.ProtocolHandler
 import dev.taah.stardew.util.UDPServerChannel
@@ -42,5 +43,6 @@ class StardewServer {
     companion object {
         val HANDLER = ProtocolHandler()
         val CONNECTIONS: HashMap<InetSocketAddress, PlayerConnection> = Maps.newHashMap()
+        var GAME = Game()
     }
 }

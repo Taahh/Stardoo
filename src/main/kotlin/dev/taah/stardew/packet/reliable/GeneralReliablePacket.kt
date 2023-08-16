@@ -4,6 +4,7 @@ import dev.taah.stardew.connection.PlayerConnection
 import dev.taah.stardew.packet.AbstractPacket
 import dev.taah.stardew.packet.handshake.ServerboundConnectPacket
 import dev.taah.stardew.util.PacketBuffer
+import io.netty.buffer.ByteBufUtil
 import java.util.Random
 import java.util.function.Consumer
 import java.util.function.Supplier
@@ -46,8 +47,10 @@ class GeneralReliablePacket() : AbstractPacket<GeneralReliablePacket>(0x43) {
         val index = buffer.writerIndex()
         buffer.writeUInt32(0)
         this.serializer?.accept(buffer)
-        buffer.setIntLE(index, buffer.readableBytes() - index)
-        println("Writing ${buffer.readableBytes() - index} skippable bytes")
+        println("Before: ${ByteBufUtil.prettyHexDump(buffer)}")
+        buffer.setIntLE(index, buffer.readableBytes() - index - 4)
+        println("After: ${ByteBufUtil.prettyHexDump(buffer)}")
+        println("Writing ${buffer.readableBytes() - index - 4} skippable bytes")
     }
 
     override fun processPacket(packet: GeneralReliablePacket, connection: PlayerConnection) {
