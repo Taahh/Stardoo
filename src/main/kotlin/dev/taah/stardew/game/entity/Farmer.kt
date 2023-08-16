@@ -5,18 +5,18 @@ import dev.taah.stardew.game.customization.Boots
 import dev.taah.stardew.game.customization.Hat
 import dev.taah.stardew.game.customization.Ring
 import dev.taah.stardew.game.entity.animal.Horse
-import dev.taah.stardew.game.`object`.Item
+import dev.taah.stardew.game.`object`.item.Item
 import dev.taah.stardew.game.`object`.Sprite
-import dev.taah.stardew.net.DancePartner
-import dev.taah.stardew.net.FarmerRenderer
-import dev.taah.stardew.net.NetList
-import dev.taah.stardew.net.Quest
+import dev.taah.stardew.net.*
+import dev.taah.stardew.net.collection.IntDictionary
+import dev.taah.stardew.net.collection.NetList
+import dev.taah.stardew.net.collection.StringDictionary
+import dev.taah.stardew.net.player.DancePartner
+import dev.taah.stardew.net.player.FarmerRenderer
 import dev.taah.stardew.util.PacketBuffer
 import dev.taah.stardew.util.serialization.NetObjectUtil.Companion.writeFields
 import dev.taah.stardew.util.world.Vector2
 import java.awt.Color
-import java.util.UUID
-import java.util.function.BiConsumer
 
 /**
  * @author Taah
@@ -24,6 +24,7 @@ import java.util.function.BiConsumer
  * @since 11:43 PM [12-08-2023]
  *
  */
+//TODO: Implement NetRef because a lot of these are supposed to be netrefs, I want to assume NetRef are references to objects that are held in the object and if they are null it doesn't write it but needs a double check
 class Farmer(val uniqueId: Long, sprite: Sprite, position: Vector2) : Character(sprite, position) {
 
     var userId: String = ""
@@ -74,7 +75,7 @@ class Farmer(val uniqueId: Long, sprite: Sprite, position: Vector2) : Character(
     var horseName: String = ""
     var millisecondsPlayed: Long = 1L
     var festivalScore: Int = 0
-    var friendshipData: Map<String, FriendshipData> = mutableMapOf()
+    var friendshipData: StringDictionary<FriendshipData> = StringDictionary()
     var drinkAnimationEvent: Item? = null
     var eatAnimationEvent: Item? = null
     var sickAnimationEvent: Int = 0
@@ -82,7 +83,33 @@ class Farmer(val uniqueId: Long, sprite: Sprite, position: Vector2) : Character(
     var doEmoteEvent: String = ""
     var questLog: NetList<Quest> = NetList()
     var professions: NetList<Int> = NetList()
-    var newLevels: NetList<Vector2> = NetList()
+    var newLevels: NetList<Vector2> = NetList() // this is technically supposed to be a netlist of a Point object but the Point looked similar to Vector2
+    var experiencePoints: NetList<Int> = NetList(false)
+    var dialogueQuestionsAnswered: NetList<Int> = NetList()
+    var cookingRecipes: StringDictionary<Int> = StringDictionary()
+    var craftingRecipes: StringDictionary<Int> = StringDictionary()
+    var activeDialogueEvents: StringDictionary<Int> = StringDictionary()
+    var achievements: NetList<Int> = NetList()
+    var specialItems: NetList<Int> = NetList()
+    var specialBigCraftables: NetList<Int> = NetList()
+    var farmingLevel: Int = 0
+    var miningLevel: Int = 0
+    var combatLevel: Int = 0
+    var foragingLevel: Int = 0
+    var fishingLevel: Int = 0
+    var luckLevel: Int = 0
+    var newSkillPointsToSpend: Int = 0
+    var addedFarmingLevel: Int = 0
+    var addedMiningLevel: Int = 0
+    var addedCombatLevel: Int = 0
+    var addedForagingLevel: Int = 0
+    var addedFishingLevel: Int = 0
+    var addedLuckLevel: Int = 0
+    var maxStamina: Int = 0
+    var currStamina: Float = 0f
+    var maxItems: Int = 0
+    var chestConsumedMineLevels: IntDictionary<Boolean> = IntDictionary()
+
 
     override fun serialize(buffer: PacketBuffer) {
         super.serialize(buffer)

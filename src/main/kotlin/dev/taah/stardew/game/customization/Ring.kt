@@ -1,8 +1,7 @@
 package dev.taah.stardew.game.customization
 
-import dev.taah.stardew.game.`object`.Item
+import dev.taah.stardew.game.`object`.item.Item
 import dev.taah.stardew.util.PacketBuffer
-import dev.taah.stardew.util.serialization.INetObject
 
 /**
  * @author Taah

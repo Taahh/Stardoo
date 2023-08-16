@@ -1,4 +1,4 @@
-package dev.taah.stardew.net
+package dev.taah.stardew.net.world
 
 /**
  * @author Taah

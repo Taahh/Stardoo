@@ -1,4 +1,4 @@
-package dev.taah.stardew.game.`object`
+package dev.taah.stardew.game.`object`.item
 
 import dev.taah.stardew.util.PacketBuffer
 import dev.taah.stardew.util.serialization.INetObject

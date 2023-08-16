@@ -1,4 +1,4 @@
-package dev.taah.stardew.net
+package dev.taah.stardew.game.`object`.item
 
 import dev.taah.stardew.util.PacketBuffer
 import dev.taah.stardew.util.serialization.INetObject
@@ -6,14 +6,12 @@ import dev.taah.stardew.util.serialization.INetObject
 /**
  * @author Taah
  * @project stardew-server
- * @since 11:31 PM [15-08-2023]
+ * @since 3:05 PM [16-08-2023]
  */
-class DancePartner : INetObject {
-    var farmerRef: FarmerRef = FarmerRef()
-    var villager = ""
+class Enchantment : INetObject {
+    var level: Int = 0
     override fun serialize(buffer: PacketBuffer) {
-        farmerRef.serialize(buffer)
-        buffer.writeString(villager)
+        buffer.writeIntLE(level)
     }
 
     override fun deserialize(buffer: PacketBuffer) {

@@ -31,6 +31,7 @@ class NetObjectSerializers {
             addSerializer(INetObject::class.java) { t, u -> u.serialize(t)}
             addSerializer(IShortEnum::class.java) { t, u -> t.writeShortLE(u.value.toInt())}
             addSerializer(Color::class.java) { t, u -> t.writeColor(u)}
+            addSerializer(Float::class.java) { t, u -> t.writeFloatLE(u)}
         }
      }
 }

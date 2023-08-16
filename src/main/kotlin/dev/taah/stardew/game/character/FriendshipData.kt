@@ -1,6 +1,6 @@
 package dev.taah.stardew.game.character
 
-import dev.taah.stardew.net.WorldDate
+import dev.taah.stardew.net.world.WorldDate
 import dev.taah.stardew.net.friendship.FriendshipStatus
 import dev.taah.stardew.util.PacketBuffer
 import dev.taah.stardew.util.serialization.INetObject

@@ -3,11 +3,10 @@ package dev.taah.stardew.game.entity.animal
 import dev.taah.stardew.game.customization.Hat
 import dev.taah.stardew.game.entity.NPC
 import dev.taah.stardew.game.`object`.Sprite
-import dev.taah.stardew.net.FarmerRef
+import dev.taah.stardew.net.player.FarmerRef
 import dev.taah.stardew.net.Mutex
 import dev.taah.stardew.util.PacketBuffer
 import dev.taah.stardew.util.serialization.NetObjectUtil.Companion.writeFields
-import dev.taah.stardew.util.world.Vector2
 import java.util.UUID
 
 /**

@@ -1,9 +1,9 @@
 package dev.taah.stardew.game.entity
 
 import dev.taah.stardew.game.`object`.Sprite
-import dev.taah.stardew.net.FarmerRef
-import dev.taah.stardew.net.Location
-import dev.taah.stardew.net.Position
+import dev.taah.stardew.net.player.FarmerRef
+import dev.taah.stardew.net.world.Location
+import dev.taah.stardew.net.world.Position
 import dev.taah.stardew.util.PacketBuffer
 import dev.taah.stardew.util.serialization.INetObject
 import dev.taah.stardew.util.serialization.NetObjectUtil.Companion.writeFields
